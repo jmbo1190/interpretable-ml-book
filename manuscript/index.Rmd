@@ -5,11 +5,26 @@ author: "Christoph Molnar"
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
 documentclass: krantz
+output:
+  bookdown::pdf_book:
+    latex_engine: xelatex
+    keep_tex: true
+    pandoc_args: --top-level-division=chapter
+    toc: true
+    toc_depth: 3
+    toc_unnumbered: no
+    toc_appendix: yes
+    number_sections: true
+    includes:
+      in_header: latex/preamble.tex
+      before_body: latex/before_body.tex
+      after_body: latex/after_body.tex
 link-citations: yes
 colorlinks: yes
-lot: no
-lof: no
-fontsize: 12pt
+lot: yes
+lof: yes
+fontsize: 11pt
+geometry: margin=0.8in
 monofont: "Source Code Pro"
 monofontoptions: "Scale=0.7"
 site: bookdown::bookdown_site
@@ -17,7 +32,15 @@ description: "Machine learning algorithms usually operate as black boxes and it 
 #url:
 github-repo: christophM/interpretable-ml-book
 always_allow_html: yes
+delete_merged_file: false
+cover-image: images/cover-lulu.jpg
 ---
+
+(ref:ampersand) &
+
+(ref:underscore) _
+
+(ref:percent) %
 
 ```{r child = '00.0-preface.Rmd'}
 ```

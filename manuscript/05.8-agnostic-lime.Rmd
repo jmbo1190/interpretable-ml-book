@@ -66,7 +66,7 @@ But it increases the probability that the result for some of the sample points p
 
 It is best to visually explain how sampling and local model training works:
 
-```{r lime-fitting, fig.cap='LIME algorithm for tabular data. A) Random forest predictions given features x1 and x2. Predicted classes: 1 (dark) or 0 (light). B) Instance of interest (big dot) and data sampled from a normal distribution (small dots). C) Assign higher weight to points near the instance of interest. D) Signs of the grid show the classifications of the locally learned model from the weighted samples. The white line marks the decision boundary (P(class=1) = 0.5).', fig.height=9, fig.width=9}
+```{r lime-fitting, fig.cap='LIME algorithm for tabular data. A) Random forest predictions given features x1 and x2. Predicted classes: 1 (dark) or 0 (light). B) Instance of interest (big dot) and data sampled from a normal distribution (small dots). C) Assign higher weight to points near the instance of interest. D) Signs of the grid show the classifications of the locally learned model from the weighted samples. The white line marks the decision boundary (P(class=1) = 0.5).', fig.height=9, fig.width=9, out.width="100%"}
 ## Creating dataset ###########################################################
 library("dplyr")
 library("ggplot2")
@@ -221,7 +221,7 @@ And where does the 0.75 even come from?
 In certain scenarios, you can easily turn your explanation around by changing the kernel width, as shown in the following figure:
 
 
-```{r lime-fail, fig.cap = "Explanation of the prediction of instance x = 1.6. The predictions of the black box model depending on a single feature is shown as a thick line and the distribution of the data is shown with rugs. Three local surrogate models with different kernel widths are computed. The resulting linear regression model depends on the kernel width: Does the feature have a negative, positive or no effect for x = 1.6?"}
+```{r lime-fail, fig.cap = "Explanation of the prediction of instance x = 1.6. The predictions of the black box model depending on a single feature is shown as a thick line and the distribution of the data is shown with rugs. Three local surrogate models with different kernel widths are computed. The resulting linear regression model depends on the kernel width: Does the feature have a negative, positive or no effect for x = 1.6?", out.width="100%"}
 set.seed(42)
 df = data.frame(x = rnorm(200, mean = 0, sd = 3))
 df$x[df$x < -5] = -5
@@ -286,7 +286,7 @@ On what day will the number of rental bikes be above the trend-free average, bas
 The explanations are created with `r n_features_lime` features.
 The results of the sparse local linear models trained for two instances with different predicted classes:
 
-```{r lime-tabular-example-explain-plot-1, fig.cap=sprintf('LIME explanations for two instances of the bike rental dataset. Warmer temperature and good weather situation have a positive effect on the prediction. The x-axis shows the feature effect: The weight times the actual feature value.') }
+```{r lime-tabular-example-explain-plot-1, fig.cap=sprintf('LIME explanations for two instances of the bike rental dataset. Warmer temperature and good weather situation have a positive effect on the prediction. The x-axis shows the feature effect: The weight times the actual feature value.'), out.width="100%" }
 library("iml")
 library("gridExtra")
 instance_indices = c(295, 8)
@@ -375,7 +375,7 @@ The "weight" column shows the proximity of the variation to the original sentenc
 
 Here are the two sentences (one spam, one no spam) with their estimated local weights found by the LIME algorithm:
 
-```{r lime-text-explanations, fig.cap = "LIME explanations for text classification."}
+```{r lime-text-explanations, fig.cap = "LIME explanations for text classification.", out.width="100%"}
 set.seed(42)
 ycomments.predict = get.ycomments.classifier(ycomments)
 explanations  = data.table::rbindlist(lapply(seq_along(texts), function(i) {
@@ -410,7 +410,7 @@ The following images show for "Bagel" and "Strawberry" the LIME explanations.
 The explanations can be displayed directly on the image samples.
 Green means that this part of the image increases the probability for the label and red means a decrease.
 
-```{r lime-images-package-example-include, fig.cap="Left: Image of a bowl of bread. Middle and right: LIME explanations for the top 2 classes (bagel, strawberry) for image classification made by Google's Inception V3 neural network.", out.width=500}
+```{r lime-images-package-example-include, fig.cap="Left: Image of a bowl of bread. Middle and right: LIME explanations for the top 2 classes (bagel, strawberry) for image classification made by Google's Inception V3 neural network.", out.width="60%"}
 knitr::include_graphics("images/lime-images-package-example-1.png")
 ```
 The prediction and explanation for "Bagel" are very reasonable, even if the prediction is wrong -- these are clearly no bagels since the hole in the middle is missing.

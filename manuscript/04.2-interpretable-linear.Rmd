@@ -212,7 +212,7 @@ Various visualizations make the linear regression model easy and quick to grasp 
 The information of the weight table (weight and variance estimates) can be visualized in a weight plot.
 The following plot shows the results from the previous linear regression model.
 
-```{r linear-weights-plot, fig.cap="Weights are displayed as points and the 95% confidence intervals as lines."}
+```{r linear-weights-plot, fig.cap="Weights are displayed as points and the 95(ref:percent) confidence intervals as lines.", out.width="100%"}
 coef_plot(mod) + scale_y_discrete("")
 ```
 
@@ -241,7 +241,7 @@ The horizontal lines extend to $\pm1.5\text{IQR}/\sqrt{n}$, with IQR being the i
 The dots are outliers.
 The categorical feature effects can be summarized in a single boxplot, compared to the weight plot, where each category has its own row.
 
-```{r linear-effects, fig.cap="The feature effect plot shows the distribution of effects (= feature value times feature weight) across the data per feature."}
+```{r linear-effects, fig.cap="The feature effect plot shows the distribution of effects (= feature value times feature weight) across the data per feature.", out.width="100%"}
 effect_plot(mod, dat) + scale_x_discrete("")
 ```
 
@@ -284,7 +284,7 @@ For a temperature of `r round(as.numeric(as.character(df["temp", "value"])), 1)`
 We add these individual effects as crosses to the effect plot, which shows us the distribution of the effects in the data.
 This allows us to compare the individual effects with the distribution of effects in the data. 
 
-```{r linear-effects-single, fig.cap="The effect plot for one instance shows the effect distribution and highlights the effects of the instance of interest."}
+```{r linear-effects-single, fig.cap="The effect plot for one instance shows the effect distribution and highlights the effects of the instance of interest.", out.width="100%"}
 i = 6
 effects = get_effects(mod, dat)
 predictions = predict(mod)
@@ -399,7 +399,7 @@ Especially when lambda is large, many weights become 0.
 The feature weights can be visualized as a function of the penalty term lambda.
 Each feature weight is represented by a curve in the following figure.
 
-```{r lasso-path, fig.cap="With increasing penalty of the weights, fewer and fewer features receive a non-zero weight estimate. These curves are also called regularization paths. The number above the plot is the number of non-zero weights."}
+```{r lasso-path, fig.cap="With increasing penalty of the weights, fewer and fewer features receive a non-zero weight estimate. These curves are also called regularization paths. The number above the plot is the number of non-zero weights.", out.width="100%"}
 library("glmnet")
 X.d = model.matrix(y ~ . -1, data = X)
 l.mod = glmnet(X.d, y)

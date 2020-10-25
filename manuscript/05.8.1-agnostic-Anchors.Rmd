@@ -20,7 +20,7 @@ Like its predecessor, the anchors approach deploys a *perturbation-based* strate
 
 In their paper, the authors compare both of their algorithms and visualize how differently these consult an instance's neighborhood to derive results. For this, the following figure depicts both LIME and anchors locally explaining a complex binary classifier (predicts either **-** or **+**) using two exemplary instances. LIME’s results do not indicate how faithful they are as LIME solely learns a linear decision boundary that best approximates the model given a perturbation space $D$. Given the same perturbation space, the anchors approach constructs explanations whose coverage is adapted to the model’s behavior and clearly express their boundaries. Thus, they are faithful by design and state exactly for which instances they are valid. This property makes anchors particularly intuitive and easy to comprehend.
 
-```{r fig.cap="LIME vs. Anchors -- A Toy Visualization. Figure from Ribeiro, Singh, and Guestrin (2018).", out.width=350, fig.align="center"}
+```{r fig.cap="LIME vs. Anchors -- A Toy Visualization. Figure from Ribeiro, Singh, and Guestrin (2018).", out.width="45%", fig.align="center"}
 knitr::include_graphics("images/anchors-visualization.png")
 ```
 
@@ -93,7 +93,7 @@ The anchors approach uses four main components to find explanations, as is shown
 
 **Modified Beam Search**: All of the above components are assembled in a beam search, which is a graph search algorithm and a variant of the breadth-first algorithm. It carries the $B$ best candidates of each round over to the next one (where $B$ is called the *Beam Width*). These $B$ best rules are then used to create new rules. The beam search conducts at most $featureCount(x)$ rounds, as each feature can only be included in a rule at most once. Thus, at every round $i$, it generates candidates with exactly $i$ predicates and selects the B best thereof. Therefore, by setting $B$ high, the algorithm more likely avoids local optima. In turn, this requires a high number of model calls and thereby increases the computational load.
 
-```{r fig.cap="The anchors algorithm’s components and their interrelations (simplified)", out.width=800}
+```{r fig.cap="The anchors algorithm’s components and their interrelations (simplified)", out.width="100%"}
 knitr::include_graphics("images/anchors-process.jpg")
 ```
 
@@ -179,7 +179,7 @@ saveRDS(bike.explanations_edge, file = "../data/cached-anchors-edge.RDS")
 ```
 
 
-```{r message=FALSE, cache=TRUE, fig.cap="Anchors explaining six instances of the bike rental dataset. Each row represents one explanation or anchor, and each bar depicts the feature predicates contained by it. The x-axis displays a rule's precision, and a bar's thickness corresponds to its coverage. The 'base' rule contains no predicates. These anchors show that the model mainly considers the temperature for predictions.", fig.height=10, fig.width=10}
+```{r message=FALSE, cache=TRUE, fig.cap="Anchors explaining six instances of the bike rental dataset. Each row represents one explanation or anchor, and each bar depicts the feature predicates contained by it. The x-axis displays a rule's precision, and a bar's thickness corresponds to its coverage. The 'base' rule contains no predicates. These anchors show that the model mainly considers the temperature for predictions.", fig.height=10, fig.width=10, out.width="100%"}
 bike.explanations = readRDS("../data/cached-anchors.RDS")
 plotExplanations(bike.explanations, colPal = colPal)
 ```
@@ -189,7 +189,7 @@ The rules shown above were generated with $\tau = 0.9$. Thus, we ask for anchors
 
 All of the previous rules were generated for instances where the model decides confidently based on a few features. However, other instances are not as distinctly classified by the model as more features are of importance. In such cases, anchors get more specific, comprise more features, and apply to fewer instances.
 
-```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide', cache=TRUE, fig.cap="Explaining instances near decision boundaries leads to specific rules comprising a higher number of feature predicates and lower coverage. Also, the empty rule, i.e., the base feature, gets less important. This can be interpreted as a signal for a decision boundary, as the instance is located in a volatile neighborhood.", fig.height=9, fig.width=10}
+```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide', cache=TRUE, fig.cap="Explaining instances near decision boundaries leads to specific rules comprising a higher number of feature predicates and lower coverage. Also, the empty rule, i.e., the base feature, gets less important. This can be interpreted as a signal for a decision boundary, as the instance is located in a volatile neighborhood.", fig.height=9, fig.width=10, out.width="100%"}
 bike.explanations_edge = readRDS("../data/cached-anchors-edge.RDS")
 plotExplanations(bike.explanations_edge, colPal = colPal)
 ```
@@ -231,7 +231,7 @@ saveRDS(cancer.explanation.balanced, file = "../data/cached-anchors-cervical-bal
 
 
 
-```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide', cache=TRUE, fig.cap="Constructing anchors within unbalanced perturbation spaces leads to unexpressive results.", fig.height=10, fig.width=10}
+```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide', cache=TRUE, fig.cap="Constructing anchors within unbalanced perturbation spaces leads to unexpressive results.", fig.height=10, fig.width=10, out.width="100%"}
 cancer.explanation = readRDS("../data/cached-anchors-cervical.RDS")
 plotExplanations(cancer.explanation, colPal = colPal)
 ```
@@ -240,7 +240,7 @@ This outcome may be unwanted and can be approached in multiple ways. For example
 
 For this example, we use a subset of the cervical cancer set in which the majority of cases are labeled *cancer*. We then have the framework to create a corresponding perturbation space from it. Perturbations are now more likely to lead to varying predictions, and the anchors algorithm can identify important features. However, one needs to take the coverage's definition into account: it is only defined within the perturbation space. In the previous examples, we used the train set as the perturbation space's basis. Since we only use a subset here, a high coverage does not necessarily indicate globally high rule importance. 
 
-```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide', cache=TRUE, fig.cap="Balancing the data set before constructing anchors shows the model's reasoning for decisions in minority cases.", fig.height=10, fig.width=11}
+```{r message=FALSE, warning=FALSE, echo=FALSE, results='hide', cache=TRUE, fig.cap="Balancing the data set before constructing anchors shows the model's reasoning for decisions in minority cases.", fig.height=10, fig.width=11, out.width="100%"}
 cancer.explanation.balanced = readRDS("../data/cached-anchors-cervical-balanced.RDS")
 table(cervical.balanced$Biopsy)
 plotExplanations(cancer.explanation.balanced, colPal = colPal)

@@ -17,7 +17,7 @@ RuleFit automatically generates these features from decision trees.
 Each path through a tree can be transformed into a decision rule by combining the split decisions into a rule.
 The node predictions are discarded and only the splits are used in the decision rules:
 
-```{r rulefit-split, fig.cap="4 rules can be generated from a tree with 3 terminal nodes.", out.width=500}
+```{r rulefit-split, fig.cap="4 rules can be generated from a tree with 3 terminal nodes.", out.width="60%"}
 knitr::include_graphics("images/rulefit.jpg")
 ```
 
@@ -103,7 +103,7 @@ But thanks to Lasso, only `r nrow(coefs[coefs$coefficient != 0,])` of the `r nro
 
 Computing the global feature importances reveals that temperature and time trend are the most important features:
 
-```{r rulefit-importance, fig.cap = 'Feature importance measures for a RuleFit model predicting bike counts. The most important features for the predictions were temperature and time trend.', dev.args = list(pointsize = 16)}
+```{r rulefit-importance, fig.cap = 'Feature importance measures for a RuleFit model predicting bike counts. The most important features for the predictions were temperature and time trend.', out.width="100%", dev.args = list(pointsize = 16), eval=FALSE}
 pre::importance(mod)
 ```
 

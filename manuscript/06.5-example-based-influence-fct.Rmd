@@ -45,7 +45,7 @@ In a dataset of newborns, a newborn weighting 6 kg would be considered an outlie
 In a dataset of bank accounts with mostly checking accounts, a dedicated loan account (large negative balance, few transactions) would be considered an outlier.
 The following figure shows an outlier for a 1-dimensional distribution.
 
-```{r outlier, fig.cap = "Feature x follows a Gaussian distribution with an outlier at x=8."}
+```{r outlier, fig.cap = "Feature x follows a Gaussian distribution with an outlier at x=8.", out.width="100%"}
 set.seed(42)
 n = 50
 x = rnorm(mean = 1, n = n)
@@ -69,7 +69,7 @@ The more the model parameters or predictions change when the model is retrained 
 The following figure shows an influential instance for a linear regression model.
 
 
-```{r influential-point, fig.cap = "A linear model with one feature. Trained once on the full data and once without the influential instance. Removing the influential instance changes the fitted slope (weight/coefficient) drastically."}
+```{r influential-point, fig.cap = "A linear model with one feature. Trained once on the full data and once without the influential instance. Removing the influential instance changes the fitted slope (weight/coefficient) drastically.", out.width="100%"}
 
 df2 = df[-nrow(df),]
 df3 = rbind(df2, data.frame(x = 8, y = 0))
@@ -101,7 +101,7 @@ For example, the learner of a decision tree is an algorithm that selects the spl
 A learner for a neural network uses backpropagation to find the best weights.
 
 
-```{r learner, fig.cap = "A learner learns a model from training data (features plus target). The model makes predictions for new data.", out.width=600}
+```{r learner, fig.cap = "A learner learns a model from training data (features plus target). The model makes predictions for new data.", out.width="85%"}
 knitr::include_graphics("images/learner.png")
 ```
 
@@ -234,7 +234,7 @@ The influence analysis tells us that the model becomes increasingly unstable whe
 This in itself is valuable information. 
 This means that errors in these instances can have a strong effect on the model.
 
-```{r cooks-analyzed, eval=TRUE, fig.cap = "A decision tree that models the relationship between the influence of the instances and their features. The maximum depth of the tree is set to 2.", eval = FALSE}
+```{r cooks-analyzed, eval=TRUE, fig.cap = "A decision tree that models the relationship between the influence of the instances and their features. The maximum depth of the tree is set to 2.", out.width="100%", eval = FALSE}
 # This code snippet causes problems on TravisCI.
 # Hack: save resulting figure locally, set eval to FALSE and load img in different chunk
 df.cervical  = cbind(df, cervical)
@@ -245,7 +245,7 @@ partykit:::plot.constparty(ct,
      terminal_panel = partykit::node_boxplot(ct, id = FALSE))
 ```
 
-```{r cooks-analyzed-include, eval=TRUE, fig.cap = "A decision tree that models the relationship between the influence of the instances and their features. The maximum depth of the tree is set to 2."}
+```{r cooks-analyzed-include, eval=TRUE, fig.cap = "A decision tree that models the relationship between the influence of the instances and their features. The maximum depth of the tree is set to 2.", out.width="100%"}
 knitr::include_graphics("images/cooks-analyzed-1.png")
 ```
 
@@ -275,7 +275,7 @@ We use a decision tree trained to predict the influence given the features, but 
 The following decision tree shows which kind of training instances were most influential for predicting the `r i`-th instance. 
 
 
-```{r influence-single, fig.cap = sprintf("Decision tree that explains which instances were most influential for predicting the %i-th instance. Data from women who smoked for 18.5 years or longer had a large influence on the prediction of the %i-th instance, with an average change in absolute prediction by 11.7 percentage points of cancer probability.", i, i), eval = FALSE}
+```{r influence-single, fig.cap = sprintf("Decision tree that explains which instances were most influential for predicting the %i-th instance. Data from women who smoked for 18.5 years or longer had a large influence on the prediction of the %i-th instance, with an average change in absolute prediction by 11.7 percentage points of cancer probability.", i, i), out.width="100%", eval = FALSE}
 # Also here TravisCI has a problem
 # Using same hack as in chunk above
 ct = rpart(abs(influence) ~ ., data = cervical.200, control = rpart.control(maxdepth = 2))
@@ -283,7 +283,7 @@ ct = as.party(ct)
 plot(ct, inner_panel = node_inner(ct, pval = FALSE, id=FALSE), terminal_panel=node_boxplot(ct,id=FALSE))
 ```
 
-```{r influence-single-include, eval=TRUE, fig.cap = sprintf("Decision tree that explains which instances were most influential for predicting the %i-th instance. Data from women who smoked for 18.5 years or longer had a large influence on the prediction of the %i-th instance, with an average change in absolute prediction by 11.7 percentage points of cancer probability.", i, i)}
+```{r influence-single-include, eval=TRUE, fig.cap = sprintf("Decision tree that explains which instances were most influential for predicting the %i-th instance. Data from women who smoked for 18.5 years or longer had a large influence on the prediction of the %i-th instance, with an average change in absolute prediction by 11.7 percentage points of cancer probability.", i, i), out.width="100%"}
 knitr::include_graphics("images/influence-single-1.png")
 ```
 
@@ -384,7 +384,7 @@ The model parameter here is 1-dimensional for demonstration purposes, but in rea
 We move only 1 over n into the direction of improvement of the loss for instance z.
 We do not know how the loss would really change when we delete z, but with the first and second derivative of the loss, we create this quadratic approximation around our current model parameter and pretend that this is how the real loss would behave.
 
-```{r quadratic-expansion, fig.cap="Updating the model parameter (x-axis) by forming a quadratic expansion of the loss around the current model parameter, and moving 1/n into the direction in which the loss with upweighted instance z (y-axis) improves most. This upweighting of instance z in the loss approximates the parameter changes if we delete z and train the model on the reduced data."}
+```{r quadratic-expansion, fig.cap="Updating the model parameter (x-axis) by forming a quadratic expansion of the loss around the current model parameter, and moving 1/n into the direction in which the loss with upweighted instance z (y-axis) improves most. This upweighting of instance z in the loss approximates the parameter changes if we delete z and train the model on the reduced data.", out.width="100%"}
 x = seq(from = -1.2, to = 1.2, length.out = 100)
 y.fun = function(x) {
   -x - 2*x^2 - x^3 + 2 * x^4
@@ -427,7 +427,7 @@ We do not actually need to calculate the new parameters, but we can use the infl
 How do the *predictions* change when we upweight training instance z?
 We can either calculate the new parameters and then make predictions using the newly parameterized model, or we can also calculate the influence  of instance z on the predictions directly, since we can calculate the influence by using the chain rule:
 
-$$\begin{align*}I_{up,loss}(z,z_{test})&=\left.\frac{d{}L(z_{test},\hat{\theta}_{\epsilon,z})}{d\epsilon}\right|_{\epsilon=0}\\&=\left.\nabla_{\theta}L(z_{test},\hat{\theta})^T\frac{d\hat{\theta}_{\epsilon,z}}{d\epsilon}\right|_{\epsilon=0}\\&=-\nabla_{\theta}L(z_{test},\hat{\theta})^T{}H^{-1}_{\theta}\nabla_{\theta}L(z,\hat{\theta})\end{align*}$$
+$$\begin{aligned}I_{up,loss}(z,z_{test})&=\left.\frac{d{}L(z_{test},\hat{\theta}_{\epsilon,z})}{d\epsilon}\right|_{\epsilon=0}\\&=\left.\nabla_{\theta}L(z_{test},\hat{\theta})^T\frac{d\hat{\theta}_{\epsilon,z}}{d\epsilon}\right|_{\epsilon=0}\\&=-\nabla_{\theta}L(z_{test},\hat{\theta})^T{}H^{-1}_{\theta}\nabla_{\theta}L(z,\hat{\theta})\end{aligned}$$
 
 The first line of this equation means that we measure the influence of a training instance on a certain prediction $z_{test}$ as a change in loss of the test instance when we upweight the instance z and get new parameters $\hat{\theta}_{\epsilon,z}$.
 For the second line of the equation, we have applied the chain rule of derivatives and get the derivative of the loss of the test instance with respect to the parameters times the influence of z on the parameters.

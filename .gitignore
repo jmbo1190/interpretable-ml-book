@@ -45,7 +45,7 @@ manuscript/images/*.pdf
 
 # LaTeX files
 *.aux
-*.tex
+#*.tex
 *.log
 
 xgboost.model

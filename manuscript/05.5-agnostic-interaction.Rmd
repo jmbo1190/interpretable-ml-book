@@ -112,7 +112,7 @@ Let us see what feature interactions look like in practice!
 We measure the interaction strength of features in a support vector machine that predicts the number of [rented bikes](#bike-data) based on weather and calendrical features. 
 The following plot shows the feature interaction H-statistic:
 
-```{r interaction-bike, fig.cap = 'The interaction strength (H-statistic) for each feature with all other features for a support vector machine predicting bicycle rentals. Overall, the interaction effects between the features are very weak (below 10% of variance explained per feature).', cache = FALSE}
+```{r interaction-bike, fig.cap = 'The interaction strength (H-statistic) for each feature with all other features for a support vector machine predicting bicycle rentals. Overall, the interaction effects between the features are very weak (below 10(ref:percent) of variance explained per feature).', out.width="100%", cache = FALSE}
 data(bike)
 library("mlr")
 library("iml")
@@ -145,7 +145,7 @@ plot(ia1) +
  scale_y_discrete("")
 ```
 
-```{r interaction-cervical-include, fig.cap = 'The interaction strength (H-statistic) for each feature with all other features for a random forest predicting the probability of cervical cancer. The years on hormonal contraceptives has the highest relative interaction effect with all other features, followed by the number of pregnancies.'}
+```{r interaction-cervical-include, fig.cap = 'The interaction strength (H-statistic) for each feature with all other features for a random forest predicting the probability of cervical cancer. The years on hormonal contraceptives has the highest relative interaction effect with all other features, followed by the number of pregnancies.', out.width="100%"}
 knitr::include_graphics("images/interaction-cervical-1.png")
 ```
 
@@ -159,7 +159,7 @@ plot(ia2) + scale_x_continuous("2-way interaction strength") +
  scale_y_continuous("")
 ```
 
-```{r interaction2-cervical-age-include, fig.cap = 'The 2-way interaction strengths (H-statistic) between number of pregnancies and each other feature. There is a strong interaction between the number of pregnancies and the age.'}
+```{r interaction2-cervical-age-include, fig.cap = 'The 2-way interaction strengths (H-statistic) between number of pregnancies and each other feature. There is a strong interaction between the number of pregnancies and the age.', out.width="100%"}
 knitr::include_graphics("images/interaction2-cervical-age-1.png")
 ```
 

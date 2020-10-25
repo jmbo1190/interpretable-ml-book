@@ -265,7 +265,7 @@ The sequential covering algorithm for two classes (one positive, one negative) w
     - Learn another rule on the remaining data.
 - Return the decision list.
 
-```{r covering-algo, fig.cap = "The covering algorithm works by sequentially covering the feature space with single rules and removing the data points that are already covered by those rules. For visualization purposes, the features x1 and x2 are continuous, but most rule learning algorithms require categorical features."}
+```{r covering-algo, fig.cap = "The covering algorithm works by sequentially covering the feature space with single rules and removing the data points that are already covered by those rules. For visualization purposes, the features x1 and x2 are continuous, but most rule learning algorithms require categorical features.", out.width="100%"}
 set.seed(42)
 n = 100
 dat = data.frame(x1 = rnorm(n), x2 = rnorm(n))
@@ -334,7 +334,7 @@ the path leading to that node is used as the rule condition.
 
 The following figure illustrates the beam search in a tree:
 
-```{r learn-one-rule, fig.cap = "Learning a rule by searching a path through a decision tree. A decision tree is grown to predict the target of interest. We start at the root node, greedily and iteratively follow the path which locally produces the purest subset (e.g. highest accuracy) and add all the split values to the rule condition. We end up with: If `location=good` and `size=big`, then `value=high`.", out.width=700}
+```{r learn-one-rule, fig.cap = "Learning a rule by searching a path through a decision tree. A decision tree is grown to predict the target of interest. We start at the root node, greedily and iteratively follow the path which locally produces the purest subset (e.g. highest accuracy) and add all the split values to the rule condition. We end up with: If `location=good` and `size=big`, then `value=high`.", out.width="90%"}
 knitr::include_graphics("images/learn-one-rule.png")
 ```
 

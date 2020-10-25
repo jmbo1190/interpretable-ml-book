@@ -18,7 +18,7 @@ The small points are the data, the large points the criticisms and the large squ
 The prototypes are selected (manually) to cover the centers of the data distribution and the criticisms are points in a cluster without a prototype.
 Prototypes and criticisms are always actual instances from the data.
 
-```{r, fig.cap = "Prototypes and criticisms for a data distribution with two features x1 and x2."}
+```{r, fig.cap = "Prototypes and criticisms for a data distribution with two features x1 and x2.", out.width="100%"}
 set.seed(1)
 dat1 = data.frame(x1 = rnorm(20, mean = 4, sd = 0.3), x2 = rnorm(20, mean = 1, sd = 0.3))
 dat2 = data.frame(x1 = rnorm(30, mean = 2, sd = 0.2), x2 = rnorm(30, mean = 2, sd = 0.2))
@@ -41,7 +41,7 @@ There are many approaches to find prototypes in the data.
 One of these is k-medoids, a clustering algorithm related to the k-means algorithm.
 Any clustering algorithm that returns actual data points as cluster centers would qualify for selecting prototypes.
 But most of these methods find only prototypes, but no criticisms.
-This chapter presents MMD-critic by Kim et. al (2016)[^critique], an approach that combines prototypes and criticisms in a single framework.
+This chapter presents MMD-critic by Kim et. al (2016)[^critiqueb], an approach that combines prototypes and criticisms in a single framework.
 
 MMD-critic compares the distribution of the data and the distribution of the selected prototypes.
 This is the central concept for understanding the MMD-critic method.
@@ -98,7 +98,7 @@ Each of the other plots shows different selections of prototypes, along with the
 The prototypes are the large dots and their distribution is shown as contour lines.
 The selection of the prototypes that best covers the data in these scenarios (bottom left) has the lowest discrepancy value.
 
-```{r mmd, fig.cap = "The squared maximum mean discrepancy measure (MMD2) for a dataset with two features and different selections of prototypes.", cache = FALSE}
+```{r mmd, fig.cap = "The squared maximum mean discrepancy measure (MMD2) for a dataset with two features and different selections of prototypes.", out.width="100%", cache = FALSE}
 set.seed(42)
 n = 40
 # create dataset from three gaussians in 2d
@@ -193,7 +193,7 @@ The labels in the following plot show the value of the witness function for vari
 Only the point in the middle has a high absolute value and is therefore a good candidate for a criticism.
 
 
-```{r witness, fig.cap = "Evaluations of the witness function at different points.", cache = FALSE, dependson = "mmd"}
+```{r witness, fig.cap = "Evaluations of the witness function at different points.", out.width="100%", cache = FALSE, dependson = "mmd"}
 witness = function(x, dist1, dist2, sigma = 1) {
   k1 = apply(dist1, 1, function(z) radial(x, z, sigma = sigma))
   k2 = apply(dist2, 1, function(z) radial(x, z, sigma = sigma))
@@ -273,7 +273,7 @@ Looking at the actual prototypes, you might notice that the number of images per
 This is because a fixed number of prototypes were searched across the entire dataset and not with a fixed number per class.
 As expected, the prototypes show different ways of writing the digits.
 
-```{r, prototypes-and-criticisms2, fig.cap = "Prototypes for a handwritten digits dataset.", out.width=600}
+```{r, prototypes-and-criticisms2, fig.cap = "Prototypes for a handwritten digits dataset.", out.width="75%"}
 knitr::include_graphics("images/proto-critique2.jpg")
 ```
 
@@ -338,4 +338,4 @@ The simplest alternative to finding prototypes is [k-medoids](https://en.wikiped
 
 [^medoids]: Kaufman, Leonard, and Peter Rousseeuw. "Clustering by means of medoids". North-Holland (1987).
 
-[^critique]: Kim, Been, Rajiv Khanna, and Oluwasanmi O. Koyejo. "Examples are not enough, learn to criticize! Criticism for interpretability." Advances in Neural Information Processing Systems (2016).
+[^critiqueb]: Kim, Been, Rajiv Khanna, and Oluwasanmi O. Koyejo. "Examples are not enough, learn to criticize! Criticism for interpretability." Advances in Neural Information Processing Systems (2016).

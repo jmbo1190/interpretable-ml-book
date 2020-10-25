@@ -82,7 +82,7 @@ Zero because none of the features contribute to improved performance on unseen t
 Or should the importances reflect how much the model depends on each of the features, regardless whether the learned relationships generalize to unseen data?
 Let us take a look at how the distributions of feature importances for training and test data differ.
 
-```{r feature-imp-sim, fig.cap="Distributions of feature importance values by data type. An SVM was trained on a regression dataset with 50 random features and 200 instances. The SVM overfits the data: Feature importance based on the training data shows many important features. Computed on unseen test data, the feature importances are close to a ratio of one (=unimportant)."}
+```{r feature-imp-sim, fig.cap="Distributions of feature importance values by data type. An SVM was trained on a regression dataset with 50 random features and 200 instances. The SVM overfits the data: Feature importance based on the training data shows many important features. Computed on unseen test data, the feature importances are close to a ratio of one (=unimportant).", out.width="100%"}
 pred = Predictor$new(mod, cbind(X, y = y), y = "y")
 imp = FeatureImp$new(pred, loss = "mae")
 
@@ -124,7 +124,7 @@ Let us look at a partial dependence plot of feature `r max.imp$feature`.
 The partial dependence plot shows how the model output changes based on changes of the feature and does not rely on the generalization error.
 It does not matter whether the PDP is computed with training or test data.
 
-```{r garbage-svm-pdp, fig.cap=sprintf("PDP of feature %s, which is the most important feature according to the feature importance based on the training data. The plot shows how the SVM depends on this feature to make predictions", max.imp$feature)}
+```{r garbage-svm-pdp, fig.cap=sprintf("PDP of feature %s, which is the most important feature according to the feature importance based on the training data. The plot shows how the SVM depends on this feature to make predictions", max.imp$feature), out.width="100%"}
 pdp = FeatureEffect$new(pred2, max.imp$feature, method = "pdp")
 pdp$plot()
 ```
@@ -171,7 +171,7 @@ imp.dat = data.frame(importance$results[c("feature", "permutation.error", "impor
 most_imp = imp.dat$feature[imp.dat$importance == max(imp.dat$importance)]
 ```
 
-```{r importance-cervical, fig.cap = sprintf("The importance of each of the features for predicting cervical cancer with a random forest. The most important feature was %s. Permuting %s resulted in an increase in 1-AUC by a factor of %.2f", most_imp, most_imp, max(imp.dat$importance))}
+```{r importance-cervical, fig.cap = sprintf("The importance of each of the features for predicting cervical cancer with a random forest. The most important feature was %s. Permuting %s resulted in an increase in 1-AUC by a factor of %.2f", most_imp, most_imp, max(imp.dat$importance)), out.width="100%"}
 plot(importance) +
   scale_x_continuous("Feature importance (loss: 1 - AUC)") +
    scale_y_discrete("")
@@ -199,7 +199,7 @@ worst = which(imp.dat$importance == min(imp.dat$importance))
 ```
 
 
-```{r importance-bike, fig.cap = sprintf("The importance for each of the features in predicting bike counts with a support vector machine. The most important feature was %s, the least important was %s.", imp.dat$feature[best], imp.dat$feature[worst])}
+```{r importance-bike, fig.cap = sprintf("The importance for each of the features in predicting bike counts with a support vector machine. The most important feature was %s, the least important was %s.", imp.dat$feature[best], imp.dat$feature[worst]), out.width="100%"}
 plot(importance) +
    scale_y_discrete("")
 ```

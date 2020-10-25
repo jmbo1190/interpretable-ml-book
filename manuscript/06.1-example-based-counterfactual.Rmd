@@ -20,7 +20,7 @@ The "event" is the predicted outcome of an instance, the "causes" are the partic
 Displayed as a graph, the relationship between the inputs and the prediction is very simple:
 The feature values cause the prediction.
 
-```{r ml-graph-cf, fig.cap = "The causal relationships between inputs of a machine learning model and the predictions, when the model is merely seen as a black box. The inputs cause the prediction (not necessarily reflecting the real causal relation of the data).", out.width=500}
+```{r ml-graph-cf, fig.cap = "The causal relationships between inputs of a machine learning model and the predictions, when the model is merely seen as a black box. The inputs cause the prediction (not necessarily reflecting the real causal relation of the data).", out.width="60%"}
 knitr::include_graphics("images/graph.jpg")
 ```
 

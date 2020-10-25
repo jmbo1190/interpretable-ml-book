@@ -21,7 +21,7 @@ You have trained a machine learning model to predict apartment prices.
 For a certain apartment it predicts €300,000 and you need to explain this prediction.
 The apartment has a size of 50 m^2^, is located on the 2nd floor, has a park nearby and cats are banned:
 
-```{r shapley-instance, fig.cap = "The predicted price for a 50 m^2^ 2nd floor apartment with a nearby park and cat ban is €300,000. Our goal is to explain how each of these feature values contributed to the prediction.", out.width=500}
+```{r shapley-instance, fig.cap = "The predicted price for a 50 $m^2$ 2nd floor apartment with a nearby park and cat ban is €300,000. Our goal is to explain how each of these feature values contributed to the prediction.", out.width="60%"}
 knitr::include_graphics("images/shapley-instance.png")
 ```
 
@@ -69,7 +69,7 @@ This estimate depends on the values of the randomly drawn apartment that served 
 We will get better estimates if we repeat this sampling step and average the contributions.
 
 
-```{r shapley-instance-intervened, fig.cap = "One sample repetition to estimate the contribution of `cat-banned` to the prediction when added to the coalition of `park-nearby` and `area-50`.", out.width=500}
+```{r shapley-instance-intervened, fig.cap = "One sample repetition to estimate the contribution of `cat-banned` to the prediction when added to the coalition of `park-nearby` and `area-50`.", out.width="60%"}
 knitr::include_graphics("images/shapley-instance-intervention.png")
 ```
 
@@ -97,7 +97,7 @@ The Shapley value is the (weighted) average of marginal contributions.
 We replace the feature values of features that are not in a coalition with random feature values from the apartment dataset to get a prediction from the machine learning model.
 
 
-```{r shapley-coalitions, fig.cap = "All 8 coalitions needed for computing the exact Shapley value of the `cat-banned` feature value.", out.width=500}
+```{r shapley-coalitions, fig.cap = "All 8 coalitions needed for computing the exact Shapley value of the `cat-banned` feature value.", out.width="60%"}
 knitr::include_graphics("images/shapley-coalitions.png")
 ```
 
@@ -135,7 +135,7 @@ diff.prediction = actual.prediction - avg.prediction
 ```
 
 
-```{r shapley-cervical-plot, fig.cap = sprintf("Shapley values for a woman in the cervical cancer dataset. With a prediction of %.2f, this woman's cancer probability is %.2f above the average prediction of %.2f. The number of diagnosed STDs increased the probability the most. The sum of contributions yields the difference between actual and average prediction (%.2f).", actual.prediction,diff.prediction, avg.prediction, diff.prediction)}
+```{r shapley-cervical-plot, fig.cap = sprintf("Shapley values for a woman in the cervical cancer dataset. With a prediction of %.2f, this woman's cancer probability is %.2f above the average prediction of %.2f. The number of diagnosed STDs increased the probability the most. The sum of contributions yields the difference between actual and average prediction (%.2f).", actual.prediction,diff.prediction, avg.prediction, diff.prediction), out.width="100%"}
 shapley2 = Shapley$new(predictor, x.interest = x.interest, sample.size = 100)
 plot(shapley2) +
   scale_y_continuous("Feature value contribution") +
@@ -166,7 +166,7 @@ x.interest = bike.train.x[instance_indices[2],]
 ```
 
 
-```{r shapley-bike-plot, fig.cap = sprintf("Shapley values for day %i. With a predicted %.0f rental bikes, this day is %.0f below the average prediction of %.0f. The weather situation and humidity had the largest negative contributions. The temperature on this day had a positive contribution. The sum of Shapley values yields the difference of actual and average prediction (%.0f).", instance_indices[2], actual.prediction, diff.prediction, avg.prediction, diff.prediction)}
+```{r shapley-bike-plot, fig.cap = sprintf("Shapley values for day %i. With a predicted %.0f rental bikes, this day is %.0f below the average prediction of %.0f. The weather situation and humidity had the largest negative contributions. The temperature on this day had a positive contribution. The sum of Shapley values yields the difference of actual and average prediction (%.0f).", instance_indices[2], actual.prediction, diff.prediction, avg.prediction, diff.prediction), out.width="100%"}
 shapley2 = Shapley$new(predictor, x.interest = x.interest)
 plot(shapley2) +  scale_y_continuous("Feature value contribution") +
   ggtitle(sprintf("Actual prediction: %.0f\nAverage prediction: %.0f\nDifference: %.0f", actual.prediction, avg.prediction, diff.prediction))  +
@@ -205,7 +205,7 @@ Nice!
 Now we know how much each feature contributed to the prediction.
 If we sum all the feature contributions for one instance, the result is the following:
 
-$$\begin{align*}\sum_{j=1}^{p}\phi_j(\hat{f})=&\sum_{j=1}^p(\beta_{j}x_j-E(\beta_{j}X_{j}))\\=&(\beta_0+\sum_{j=1}^p\beta_{j}x_j)-(\beta_0+\sum_{j=1}^{p}E(\beta_{j}X_{j}))\\=&\hat{f}(x)-E(\hat{f}(X))\end{align*}$$
+$$\begin{aligned}\sum_{j=1}^{p}\phi_j(\hat{f})=&\sum_{j=1}^p(\beta_{j}x_j-E(\beta_{j}X_{j}))\\=&(\beta_0+\sum_{j=1}^p\beta_{j}x_j)-(\beta_0+\sum_{j=1}^{p}E(\beta_{j}X_{j}))\\=&\hat{f}(x)-E(\hat{f}(X))\end{aligned}$$
 
 This is the predicted value for the data point x minus the average predicted value.
 Feature contributions can be negative.
@@ -379,7 +379,7 @@ The Shapley value is the wrong explanation method if you seek sparse explanation
 Explanations created with the Shapley value method **always use all the features**.
 Humans prefer selective explanations, such as those produced by LIME.
 LIME might be the better choice for explanations lay-persons have to deal with.
-Another solution is [SHAP](https://github.com/slundberg/shap) introduced by Lundberg and Lee (2016)[^lundberg2016], which is based on the Shapley value, but can also provide explanations with few features.
+Another solution is [SHAP](https://github.com/slundberg/shap) introduced by Lundberg and Lee (2016)[^lundberg2016b], which is based on the Shapley value, but can also provide explanations with few features.
 
 The Shapley value returns a simple value per feature, but **no prediction model** like LIME.
 This means it cannot be used to make statements about changes in prediction for changes in the input, such as:
@@ -421,7 +421,7 @@ It is faster than the Shapley value method, and for models without interactions,
 
 [^breakdown]: Staniak, Mateusz, and Przemyslaw Biecek. "Explanations of model predictions with live and breakDown packages." arXiv preprint arXiv:1804.01955 (2018).
 
-[^lundberg2016]: Lundberg, Scott M., and Su-In Lee. "A unified approach to interpreting model predictions." Advances in Neural Information Processing Systems. 2017.
+[^lundberg2016b]: Lundberg, Scott M., and Su-In Lee. "A unified approach to interpreting model predictions." Advances in Neural Information Processing Systems. 2017.
 
 
 [^cond1]: Sundararajan, Mukund, and Amir Najmi. "The many Shapley values for model explanation." arXiv preprint arXiv:1908.08474 (2019).

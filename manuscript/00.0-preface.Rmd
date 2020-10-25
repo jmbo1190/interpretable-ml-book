@@ -7,9 +7,28 @@ devtools::install_github("viadee/anchorsOnR")
 install.packages("../pkg/sbrl_1.2.tar.gz", repos = NULL, type = "source")
 ```
 
+```{r eval=FALSE, include=FALSE, results='asis'}
+if (output == 'latex'){
+  cat('\n\n\\phantomsection\n\\newpage\n\\phantomsection\n\n')
+  cat('
+  \\setcounter{tocdepth}{3} 
+  \\hypertarget{tocpage}{}
+  \\bookmark[dest=tocpage,level=chapter]{Contents}
+  \\tableofcontents
+  \\phantomsection
+  \\newpage')
+  #cat('\nThis is the LaTeX output format.\n')
+  }
+```
 
 # Summary {-}
-```{r cover, cache=FALSE, eval = is.html, out.width=500, fig.align="center"}
+```{r eval=FALSE, include=FALSE}
+print(rmarkdown::all_output_formats(knitr::current_input()))
+print(output)
+```
+
+
+```{r cover, cache=FALSE, eval = is.html, out.width="60%", fig.align="center"}
 knitr::include_graphics('images/title_page.jpg', dpi = NA)
 ```
 
